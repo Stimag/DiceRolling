@@ -13,3 +13,4 @@ public class RegularDice extends Dice {
 		return totalDiceRollValue;
 	}
 }
+  

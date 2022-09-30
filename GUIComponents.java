@@ -10,42 +10,47 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class GUIComponents implements ActionListener {
-	private final String[] gamesArray = {"Regular dice", "DnD", "Yatzy"};
+	private final String[] gamesArray = {"Regular Dice", "DnD", "Yatzy"};
 	private final Integer[] diceAmountArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	protected JButton diceRollButton;
-	private JComboBox<String> gameChoosingMenu;
+	protected JComboBox<String> gameChoosingMenu;
 	protected JComboBox<Integer> diceAmountMenu;
 	protected JLabel diceRollText = new JLabel("");
+	protected JLabel diceRollWithModifierText = new JLabel("");
+	protected JFrame dndDiceFrame = new JFrame("Dice Rolling");
+	protected JFrame regularDiceFrame = new JFrame("Dice Rolling");
 	
 	
-	 public void addCommonComponentsToPanel(Container diceRollPanel) {
-        diceRollPanel.setLayout(new BoxLayout(diceRollPanel, BoxLayout.Y_AXIS));
-        diceRollPanel.setPreferredSize(new Dimension(500, 400));
-
+	 public void addCommonComponentsToPanel(Container diceRollingPanel) {
+        diceRollingPanel.setLayout(new BoxLayout(diceRollingPanel, BoxLayout.Y_AXIS));
+        diceRollingPanel.setPreferredSize(new Dimension(500, 500));
+        
         // Used for centering
-        diceRollPanel.add(Box.createVerticalGlue());
+        diceRollingPanel.add(Box.createVerticalGlue());
         
         // Adding button with "Roll the dice" text
-        addDiceRollButton("Roll the dice", diceRollPanel);
-        
-        // Adding "Dice rolled x" with empty space over and under
-        addTextLabel(" ", diceRollPanel);
-        diceRollPanel.add(diceRollText);
-        addTextLabel(" ", diceRollPanel);
+        addDiceRollButton("Roll the dice", diceRollingPanel);
+         
+        // Adding "Dice rolled x" and "With modifier: y" with empty space over and under
+        addTextLabel(" ", diceRollingPanel);
+        diceRollingPanel.add(diceRollText);
+        diceRollingPanel.add(diceRollWithModifierText);
+        // For some reason this label did not center itself as diceRollText did
+        diceRollWithModifierText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addTextLabel(" ", diceRollingPanel); 
         
         // Adding dropdown menus with labels
-        addTextLabel(" ", diceRollPanel);
-        addTextLabel("Choose game", diceRollPanel);
-        addGameChoosingMenu(gamesArray, diceRollPanel);
+        addTextLabel(" ", diceRollingPanel);
+        addTextLabel("Choose game", diceRollingPanel);
+        addGameChoosingMenu(gamesArray, diceRollingPanel);
         
-        addTextLabel(" ", diceRollPanel);
-        addTextLabel("Amount of dices to roll", diceRollPanel);
-        addDiceAmountMenu(diceAmountArray, diceRollPanel);
+        addTextLabel(" ", diceRollingPanel);
+        addTextLabel("Amount of dices to roll", diceRollingPanel);
+        addDiceAmountMenu(diceAmountArray, diceRollingPanel);
     }
 	
 	public void addDiceRollButton(String text, Container panel) {
@@ -64,6 +69,7 @@ public class GUIComponents implements ActionListener {
     	gameChoosingMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
     	gameChoosingMenu.setMaximumSize(gameChoosingMenu.getPreferredSize());
     	gameChoosingMenu.setFont(gameChoosingMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
+    	gameChoosingMenu.addActionListener(this);
     	panel.add(gameChoosingMenu);
 	}
 	 

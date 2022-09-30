@@ -1,4 +1,4 @@
-
+ 
 public class DndDice extends Dice {
 	
 	public DndDice(String diceType) {
@@ -8,13 +8,18 @@ public class DndDice extends Dice {
 	
 	public int multipleDiceRollsWithModifier(int amount, int modifier) {
 		int totalDiceRollValue = 0;
+		
 		for(int i = 0; i < amount; i++) {
 			totalDiceRollValue += diceRoll();
 		}
+		
+		
 		return totalDiceRollValue + modifier;
-	}
+	} 
     
+	
     
+	
     // Highest dice roll counts
     public int diceRollWithAdvantage(int modifier) {
     	int diceRollOne = diceRoll() + modifier;
@@ -40,9 +45,5 @@ public class DndDice extends Dice {
     	else {
     		return diceRollTwo;
     	}
-    }
-    
-    public String toString() {
-    	return "Dice rolled: ";
     }
 }

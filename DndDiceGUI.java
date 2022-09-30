@@ -1,19 +1,14 @@
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
  
 public class DndDiceGUI extends GUIComponents implements ActionListener  {
 	private final String[] diceTypeArray = {"d4", "d6", "d8", "d10", "d12", "d20", "d100"};
@@ -22,26 +17,37 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
 	private JComboBox<String> diceTypeMenu;
 	private JComboBox<Integer> modifierMenu;
 	private JComboBox<String> advantageAndDisadvantageMenu;
+	private int amountOfDices;
+	private String diceType;
+	private int modifierValue;
+	private DndDice dndDice;
 	
 	
-    public void addComponentsToPanel(Container diceRollPanel) {
+    public void addComponentsToPanel(Container dndDicePanel) {
+    	// Clearing panel when changing games
+    	dndDicePanel.removeAll();
+    	dndDicePanel.revalidate();
+    	dndDicePanel.repaint();
+    	addCommonComponentsToPanel(dndDicePanel);
+    	
         // Adding dropdown menu for dice types
-    	addTextLabel(" ", diceRollPanel);
-        addTextLabel("Dice type", diceRollPanel);
-        addDiceTypeMenu(diceTypeArray, diceRollPanel);
+    	addTextLabel(" ", dndDicePanel);
+        addTextLabel("Dice type", dndDicePanel);
+        this.addDiceTypeMenu(diceTypeArray, dndDicePanel);
         
         // Adding dropdown menu for modifier
-        addTextLabel(" ", diceRollPanel);
-        addTextLabel("Modifier", diceRollPanel);
-        addModifierMenu(modifiersArray, diceRollPanel);
+        addTextLabel(" ", dndDicePanel);
+        addTextLabel("Modifier", dndDicePanel);
+        this.addModifierMenu(modifiersArray, dndDicePanel);
         
         // Adding dropdown menu for none, advantage or disadvantage
-    	addTextLabel(" ", diceRollPanel);
-        addTextLabel("Advantage & disadvantage", diceRollPanel);
-        addAdvantageAndDisadvantageMenu(advantageArray, diceRollPanel);
+    	addTextLabel(" ", dndDicePanel);
+        addTextLabel("Advantage & disadvantage", dndDicePanel);
+        this.addAdvantageAndDisadvantageMenu(advantageArray, dndDicePanel);
+       
         
         // Used for centering
-        diceRollPanel.add(Box.createVerticalGlue());
+        dndDicePanel.add(Box.createVerticalGlue());
     }
     
     @Override
@@ -51,11 +57,11 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     		diceRollText.setAlignmentX(Component.CENTER_ALIGNMENT);
     		
     		// Setting dice type
-    		String diceType = (String) diceTypeMenu.getSelectedItem();
-    		DndDice dndDice = new DndDice(diceType);
+    		diceType = (String) diceTypeMenu.getSelectedItem();
+    		dndDice = new DndDice(diceType);
     		
     		// Setting modifier
-    		int modifierValue = (int) modifierMenu.getSelectedItem();
+    		modifierValue = (int) modifierMenu.getSelectedItem();
     		
     		// Setting advantage or disadvantage
     		String advantageOrNot = (String) advantageAndDisadvantageMenu.getSelectedItem();
@@ -67,11 +73,35 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     		}
     		
     		// Setting amount of dices to roll
-    		int amountOfDices = (int) diceAmountMenu.getSelectedItem();
-    		diceRollText.setText("Dice rolled " + dndDice.multipleDiceRollsWithModifier(amountOfDices, modifierValue));
+    	    amountOfDices = (int) diceAmountMenu.getSelectedItem();
+    	    this.diceRollText(); 
     	}
+    	
+    	// Choosing game
+		String chosenGame = (String) gameChoosingMenu.getSelectedItem();
+		if(chosenGame.equals("Regular Dice")) {
+			dndDiceFrame.setVisible(false);
+			Main.regularDiceGUI.createAndShowGUI();
+		}
     }
- 
+    
+    public void diceRollText() {
+    	int diceRollValueWithModifier = dndDice.multipleDiceRollsWithModifier(amountOfDices, modifierValue);
+    	
+    	
+		if(amountOfDices == 1 && diceType.equals("d20") && diceRollValueWithModifier - modifierValue == 1) {
+			diceRollText.setText("Critical fail!");
+			diceRollWithModifierText.setText("With modifier: " + diceRollValueWithModifier);
+		}
+		else if(amountOfDices == 1 && diceType.equals("d20") && diceRollValueWithModifier - modifierValue == 20) {
+			diceRollText.setText("Critical hit!");
+			diceRollWithModifierText.setText("With modifier: " + diceRollValueWithModifier);
+		} else {
+			diceRollText.setText("Dice rolled " + (diceRollValueWithModifier - modifierValue));
+			diceRollWithModifierText.setText("With modifier: " + diceRollValueWithModifier);	
+		}
+    }
+  
 
     public void addDiceTypeMenu(String[] dropdownChoices, Container panel) {
     	diceTypeMenu = new JComboBox<>(dropdownChoices);
@@ -102,13 +132,13 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     
     
     public void createAndShowGUI() {
-        JFrame diceRollFrame = new JFrame("Dice Rolling");
-        diceRollFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dndDiceFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        addCommonComponentsToPanel(diceRollFrame.getContentPane());
-        addComponentsToPanel(diceRollFrame.getContentPane());
+        this.addComponentsToPanel(dndDiceFrame.getContentPane());
+        
+        gameChoosingMenu.setSelectedIndex(1);
  
-        diceRollFrame.pack();
-        diceRollFrame.setVisible(true);
+        dndDiceFrame.pack();
+        dndDiceFrame.setVisible(true);
     }
 }

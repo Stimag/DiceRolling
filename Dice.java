@@ -1,5 +1,5 @@
 public class Dice {
-	private String diceType;
+	protected String diceType;
 	private int diceRollValue;
     
     public Dice(String diceType) {
@@ -11,7 +11,7 @@ public class Dice {
     	int minValue = 1;
     	int maxValue = 0;
     	
-		
+		 
     	if(this.diceType.equals("d4")) {
     		maxValue = 4;
     	} 
