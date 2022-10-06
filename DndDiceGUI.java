@@ -28,7 +28,14 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	dndDicePanel.removeAll();
     	dndDicePanel.revalidate();
     	dndDicePanel.repaint();
+    	
+    	// Adding common components used in all GUIs
     	addCommonComponentsToPanel(dndDicePanel);
+    	
+    	// Adding dropdown menu for amount of dices to roll
+    	addTextLabel(" ", dndDicePanel);
+        addTextLabel("Amount of dices to roll", dndDicePanel);
+        addDiceAmountMenu(diceAmountArray, dndDicePanel);
     	
         // Adding dropdown menu for dice types
     	addTextLabel(" ", dndDicePanel);
@@ -50,10 +57,11 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
         dndDicePanel.add(Box.createVerticalGlue());
     }
     
-    @Override
+    
     public void actionPerformed(ActionEvent event) {
     	// Perform action when dice roll button is clicked
     	if(event.getSource() == diceRollButton) {
+    		// Centering "Dice rolled x"
     		diceRollText.setAlignmentX(Component.CENTER_ALIGNMENT);
     		
     		// Setting dice type
@@ -77,17 +85,21 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	    this.diceRollText(); 
     	}
     	
-    	// Choosing game
+    	// Choosing game and GUI to show
 		String chosenGame = (String) gameChoosingMenu.getSelectedItem();
 		if(chosenGame.equals("Regular Dice")) {
 			dndDiceFrame.setVisible(false);
 			Main.regularDiceGUI.createAndShowGUI();
 		}
+		else if(chosenGame.equals("Yatzy")) {
+    		dndDiceFrame.setVisible(false);
+			Main.yatzyGUI.createAndShowGUI();
+		}
     }
+    
     
     public void diceRollText() {
     	int diceRollValueWithModifier = dndDice.multipleDiceRollsWithModifier(amountOfDices, modifierValue);
-    	
     	
 		if(amountOfDices == 1 && diceType.equals("d20") && diceRollValueWithModifier - modifierValue == 1) {
 			diceRollText.setText("Critical fail!");
@@ -110,6 +122,7 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	diceTypeMenu.setFont(diceTypeMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
     	panel.add(diceTypeMenu);
     }
+    
     
     public void addModifierMenu(Integer[] dropdownChoices, Container panel) {
     	modifierMenu = new JComboBox<>(dropdownChoices);

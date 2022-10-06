@@ -6,18 +6,16 @@ public class DndDice extends Dice {
 	}
 	
 	
-	public int multipleDiceRollsWithModifier(int amount, int modifier) {
+	public int multipleDiceRollsWithModifier(int amountOfDices, int modifier) {
 		int totalDiceRollValue = 0;
 		
-		for(int i = 0; i < amount; i++) {
+		for(int i = 0; i < amountOfDices; i++) {
 			totalDiceRollValue += diceRoll();
 		}
 		
 		
 		return totalDiceRollValue + modifier;
 	} 
-    
-	
     
 	
     // Highest dice roll counts

@@ -9,9 +9,9 @@ import javax.swing.JFrame;
  
 public class RegularDiceGUI extends GUIComponents implements ActionListener {
 	private final RegularDice d6 = new RegularDice("d6");
-	private DndDiceGUI dndDiceGUI = new DndDiceGUI();
 	
 	public void addComponentsToPanel(Container regularDicePanel) {
+		// Clearing panel when changing games
 		regularDicePanel.removeAll();
 		regularDicePanel.revalidate();
 		regularDicePanel.repaint();
@@ -19,12 +19,16 @@ public class RegularDiceGUI extends GUIComponents implements ActionListener {
 		// Adding common components used in all GUIs
         addCommonComponentsToPanel(regularDicePanel);
         
+        // Adding dropdown menu for amount of dices to roll
+    	addTextLabel(" ", regularDicePanel);
+        addTextLabel("Amount of dices to roll", regularDicePanel);
+        addDiceAmountMenu(diceAmountArray, regularDicePanel);
+        
         // Used for centering
         regularDicePanel.add(Box.createVerticalGlue());
     }
    
     
-    @Override
     public void actionPerformed(ActionEvent event) {
     	// Perform action when dice roll button is clicked
     	if(event.getSource() == diceRollButton) {
@@ -34,11 +38,15 @@ public class RegularDiceGUI extends GUIComponents implements ActionListener {
     		diceRollText.setText("Dice rolled " + d6.multipleDiceRolls(amountOfDices));
     	}
     	
-    	// Choosing game
+    	// Choosing game and GUI to show
     	String chosenGame = (String) gameChoosingMenu.getSelectedItem();
     	if(chosenGame.equals("DnD")) {
     		regularDiceFrame.setVisible(false);
-			dndDiceGUI.createAndShowGUI();
+			Main.dndDiceGUI.createAndShowGUI();
+		}
+    	else if(chosenGame.equals("Yatzy")) {
+    		regularDiceFrame.setVisible(false);
+			Main.yatzyGUI.createAndShowGUI();
 		}
     } 
  

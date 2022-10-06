@@ -5,9 +5,9 @@ public class RegularDice extends Dice {
 		super(diceType);
 	}
 	
-	public int multipleDiceRolls(int amount) {
+	public int multipleDiceRolls(int amountOfDices) {
 		int totalDiceRollValue = 0;
-		for(int i = 0; i < amount; i++) {
+		for(int i = 0; i < amountOfDices; i++) {
 			totalDiceRollValue += diceRoll();
 		}
 		return totalDiceRollValue;
