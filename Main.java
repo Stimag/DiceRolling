@@ -1,5 +1,3 @@
-
-
 public class Main {
 	public static final RegularDiceGUI regularDiceGUI = new RegularDiceGUI();
 	public static final DndDiceGUI dndDiceGUI = new DndDiceGUI();
