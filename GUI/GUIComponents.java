@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class GUIComponents implements ActionListener {
+abstract class GUIComponents implements ActionListener {
 	private final String[] gamesArray = {"Regular Dice", "DnD", "Yatzy"};
 	protected final Integer[] diceAmountArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	protected JButton diceRollButton;
