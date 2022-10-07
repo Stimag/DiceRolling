@@ -1,9 +1,11 @@
 
 public class RegularDice extends Dice {
 
+	
 	public RegularDice(String diceType) {
 		super(diceType);
 	}
+	
 	
 	public int multipleDiceRolls(int amountOfDices) {
 		int totalDiceRollValue = 0;

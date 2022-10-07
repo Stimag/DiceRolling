@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 public class RegularDiceGUI extends GUIComponents implements ActionListener {
 	private final RegularDice d6 = new RegularDice("d6");
 	
+	
 	public void addComponentsToPanel(Container regularDicePanel) {
 		// Clearing panel when changing games
 		regularDicePanel.removeAll();

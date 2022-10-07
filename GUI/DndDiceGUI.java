@@ -9,7 +9,6 @@ import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
- 
 public class DndDiceGUI extends GUIComponents implements ActionListener  {
 	private final String[] diceTypeArray = {"d4", "d6", "d8", "d10", "d12", "d20", "d100"};
 	private final Integer[] modifiersArray = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

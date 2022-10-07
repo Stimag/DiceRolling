@@ -1,7 +1,8 @@
-public class Dice {
+abstract class Dice {
 	protected String diceType;
 	private int diceRollValue;
     
+	
     public Dice(String diceType) {
         this.diceType = diceType;
     }
@@ -42,6 +43,5 @@ public class Dice {
         return this.diceRollValue;
     }
     
-
 }
 

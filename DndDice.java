@@ -1,6 +1,7 @@
  
 public class DndDice extends Dice {
 	
+	
 	public DndDice(String diceType) {
 		super(diceType);
 	}

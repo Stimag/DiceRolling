@@ -1,9 +1,11 @@
 
 public class YatzyDice extends Dice {
 
+	
 	public YatzyDice(String diceType) {
 		super(diceType);
 	}
+	
 	
 	public int yatzyDiceRoll(int amountOfDices) {
 			int totalDiceRollValue = 0;
