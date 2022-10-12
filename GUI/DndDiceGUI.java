@@ -1,7 +1,6 @@
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -118,7 +117,7 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	diceTypeMenu = new JComboBox<>(dropdownChoices);
     	diceTypeMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
     	diceTypeMenu.setMaximumSize(diceTypeMenu.getPreferredSize());
-    	diceTypeMenu.setFont(diceTypeMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
+    	diceTypeMenu.setFont(diceTypeMenu.getFont().deriveFont(12));
     	panel.add(diceTypeMenu);
     }
     
@@ -127,8 +126,8 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	modifierMenu = new JComboBox<>(dropdownChoices);
     	modifierMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
     	modifierMenu.setMaximumSize(modifierMenu.getPreferredSize());
+    	modifierMenu.setFont(modifierMenu.getFont().deriveFont(12));
     	modifierMenu.setSelectedIndex(5);
-    	modifierMenu.setFont(modifierMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
     	panel.add(modifierMenu);
     }
     
@@ -137,8 +136,8 @@ public class DndDiceGUI extends GUIComponents implements ActionListener  {
     	advantageAndDisadvantageMenu = new JComboBox<>(dropdownChoices);
     	advantageAndDisadvantageMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
     	advantageAndDisadvantageMenu.setMaximumSize(advantageAndDisadvantageMenu.getPreferredSize());
+    	advantageAndDisadvantageMenu.setFont(advantageAndDisadvantageMenu.getFont().deriveFont(12));
     	advantageAndDisadvantageMenu.setSelectedIndex(1);
-    	advantageAndDisadvantageMenu.setFont(advantageAndDisadvantageMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
     	panel.add(advantageAndDisadvantageMenu);
     }
     

@@ -31,7 +31,7 @@ public class YatzyGUI extends GUIComponents implements ActionListener {
 		// Making space between components
         addTextLabel(" ", yatzyDicePanel);
         
-        // Creating horizontal line of toggle buttons
+        // Creating horizontal line of toggle buttons for dice rolls
         Box buttonbox = Box.createHorizontalBox();
 		this.addYatzyRolledDiceValueButton(diceRollOne, buttonbox);
 		this.addYatzyRolledDiceValueButton(diceRollTwo, buttonbox);

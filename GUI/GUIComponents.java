@@ -1,7 +1,6 @@
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -53,8 +52,8 @@ abstract class GUIComponents implements ActionListener {
 	 
 	public void addDiceRollButton(String text, Container panel) {
 	    diceRollButton = new JButton(text);
-	    diceRollButton.setFont(diceRollButton.getFont().deriveFont(Font.BOLD, 20f));
 	    diceRollButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    diceRollButton.setFont(diceRollButton.getFont().deriveFont(20f));
 	    diceRollButton.setBorder(BorderFactory.createCompoundBorder(diceRollButton.getBorder(),
 	            BorderFactory.createEmptyBorder(4, 8, 4, 8)));
 	    diceRollButton.addActionListener(this);
@@ -76,7 +75,7 @@ abstract class GUIComponents implements ActionListener {
 		diceAmountMenu = new JComboBox<>(dropdownChoices);
 		diceAmountMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
 		diceAmountMenu.setMaximumSize(diceAmountMenu.getPreferredSize());
-		diceAmountMenu.setFont(diceAmountMenu.getFont().deriveFont(Font.ROMAN_BASELINE, 12f));
+		diceAmountMenu.setFont(diceAmountMenu.getFont().deriveFont(12));
 		panel.add(diceAmountMenu);
 	}
 	
@@ -84,6 +83,7 @@ abstract class GUIComponents implements ActionListener {
 	public void addTextLabel(String text, Container panel) {
 		JLabel textLabel = new JLabel("");
 	    textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    textLabel.setFont(textLabel.getFont().deriveFont(13f));
 	    textLabel.setText(text);
 	    panel.add(textLabel);
 	}
